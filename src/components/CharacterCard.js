@@ -1,5 +1,15 @@
 import React from "react";
 
-export default function CharacterCard() {
-  return <span>todo: character</span>;
+const CharacterCard = props => {
+  return (
+  <div className="character-card">
+    <h2>{props.name}</h2>
+    <div className="character-species">
+      Species: <em>{props.species}</em>
+    </div>
+  </div>
+  
+    )
 }
+
+export default CharacterCard;
