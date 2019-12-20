@@ -1,4 +1,13 @@
 import React, { useState } from "react";
+import styles from 'styled-components';
+
+const Button=styles.button`
+padding: 1rem;
+`
+
+const Input=styles.input`
+padding:1rem;
+`
 
 export default function SearchForm(props) {
   
@@ -22,14 +31,14 @@ props.search(filter)
   return (
     <section>
       <form onSubmit={submitHandler}>
-        <input 
+        <Input 
         onChange={handleChanges}
         type='text'
         name='character'
         id='character'
-        placeholder=' Search for your favorite character...'
+        placeholder=' Search...'
         />
-        <button type="submit">Submit!</button>
+        <Button type="submit">Submit!</Button>
       </form>
     </section>
   )
