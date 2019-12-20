@@ -1,21 +1,28 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-import { Link } from "react-router-dom";
+import {  Link } from "react-router-dom";
 import CharacterCard from "./CharacterCard";
+import SearchForm from './SearchForm';
 
 
-const CharacterList = props => {
+export default function CharacterList(props) {
   // TODO: Add useState to track data from useEffect
   const [characters, setCharacters] = useState([])
+  const [filterData, updateData] = useState([])
 
+  // TODO: Add API Request here - must run in `useEffect`
+  //  Important: verify the 2nd `useEffect` parameter: the dependancies array!
+  const search = allcharacters => {
+    updateData(allcharacters)
+  }
+  
   useEffect(() => {
-    // TODO: Add API Request here - must run in `useEffect`
-    //  Important: verify the 2nd `useEffect` parameter: the dependancies array!
-  const getCharacters = () => {
+    const getCharacters = () => {
     axios 
     .get (`https://rickandmortyapi.com/api/character/`)
     .then (res => {
-      setCharacters(res.data)
+      setCharacters(res.data.results)
+      updateData(res.data.results)
     })
     .catch (error => {
       console.log('Theres an error in the API call in Character List', error)
@@ -27,26 +34,31 @@ const CharacterList = props => {
 
   return (
     <section className="character-list">
-      {characters.map(character => (
-        <CharacterList key={character.id} character={character} />
+      <Link className='links' to={'/'}>Welcome</Link>
+      <SearchForm search={search} character={characters}/>
+      {filterData.map(character => (
+        <CharacterCard 
+        key={character.id}
+        name={character.name}
+        species={character.species}
+        />
       ))}
+      
     </section>
   );
 }
 
-function CharacterDetails({ character }) {
-  const { id, name, species } = character;
+// function CharacterDetails({ character }) {
+//   const { id, name, species } = character;
 
-  return (
-    <div>
-      <Link to = {`/characters/results/${id}`}>
-        <CharacterCard
-          name={name}
-          species={species}>
-        </CharacterCard>
-      </Link>
-    </div>
-  );
-}
-
-export default CharacterList;
+//   return (
+//     <div>
+//       <Link to = {`/characters/${id}`}>
+//         <CharacterCard
+//           name={name}
+//           species={species}>
+//         </CharacterCard>
+//       </Link>
+//     </div>
+//   );
+// }

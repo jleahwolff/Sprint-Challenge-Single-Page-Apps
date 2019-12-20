@@ -8,7 +8,7 @@ export default function WelcomePage() {
         <img
           className="main-img"
           src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-          alt="rick"
+          alt="Im pickle riiiiick"
         />
       </header>
     </section>
