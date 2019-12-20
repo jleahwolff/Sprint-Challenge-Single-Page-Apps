@@ -4,11 +4,8 @@ const CharacterCard = props => {
   return (
   <div className="character-card">
     <h2>{props.name}</h2>
-    <div className="character-species">
-      Species: <em>{props.species}</em>
-    </div>
+      <p>Species: <em>{props.species}</em> </p>
   </div>
-  
     )
 }
 
